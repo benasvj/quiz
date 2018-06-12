@@ -1,0 +1,46 @@
+.results{
+    width:80%;
+    margin-top:40px;
+    h1{
+        font-size:24px;
+        font-weight:400;
+        text-align:left;
+    }
+    .line{
+        border-top:1px solid $color-blue;
+    }
+    h3{
+        font-size:18px;
+        font-weight:600;
+        margin-bottom:10px;
+    }
+    p{
+        font-size:17px;
+        font-weight:400;
+        text-align:left;
+        color:$color-grey;
+        margin-bottom:30px;
+    }
+    .score-bar{
+        width:400px;
+        border-radius:4px;
+        border:1px solid rgb(46,84,151);
+        height:30px;
+        position:relative;
+        span{
+            position:absolute;
+            left:40%;
+            top:20%;
+            font-weight:600;
+        }
+    }
+    .filled-score-bar{
+        background:$color-blue;
+        border:1px solid rgb(46,84,151);
+        height:30px;
+        box-sizing:border-box;  
+    }
+}
+
+
+
