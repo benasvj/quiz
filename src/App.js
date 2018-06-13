@@ -14,7 +14,7 @@ class App extends Component {
     questions:[],
     activeQuestion:0,
     answered:[],
-    results:[],  //procentais, antras narys laikas
+    results:[],  
     startTime:0,
     endTime:0
   }
@@ -43,17 +43,9 @@ class App extends Component {
     }
   };
 
-  changePart = (part)=>{
-    this.setState({activePart:part})
+  startQuiz = ()=>{
+    this.setState({activePart:"test",startTime:new Date()});
   };
-
-  setTime = (time)=>{
-    switch(time){
-      case "starting" : return this.setState({startTime:new Date().format('m-d-Y h:i:s')});
-      case "ending" : return this.setState({endTime:new Date().format('m-d-Y h:i:s')});
-      default : console.log("error")
-    }
-  }
 
   endQuiz = ()=>{
     var correctOnes = 0;
@@ -63,9 +55,7 @@ class App extends Component {
       };
     });
     const score = correctOnes*100/this.state.questions.length;
-    const time = (this.state.endTime-this.state.startTime)/1000;  //cia liko pabaigt su laiku + radio inputus default nuimt
-    console.log(time);
-    this.setState({results:score});
+    this.setState({activePart:"results", endTime:new Date(), results:score});
   };
 
   changeQuestion = (type)=>{
@@ -86,9 +76,9 @@ class App extends Component {
 
   renderContent =()=>{
     switch(this.state.activePart){
-      case "login" : return <Header loginHandler={this.loginHandler} changePart={this.changePart} setTime={this.setTime}/>
-      case "test" : return <Question questions={this.state.questions} activeQuestion={this.state.activeQuestion} changeQuestion={this.changeQuestion} addAnswer={this.addAnswer} answered={this.state.answered} changePart={this.changePart} endQuiz={this.endQuiz} setTime={this.setTime}/>
-      case "results" : return <Results userName={this.state.name} userSurname={this.state.surname} results={this.state.results}/>
+      case "login" : return <Header loginHandler={this.loginHandler} startQuiz={this.startQuiz}/>
+      case "test" : return <Question questions={this.state.questions} activeQuestion={this.state.activeQuestion} changeQuestion={this.changeQuestion} addAnswer={this.addAnswer} answered={this.state.answered} endQuiz={this.endQuiz}/>
+      case "results" : return <Results userName={this.state.name} userSurname={this.state.surname} results={this.state.results} duration={(this.state.endTime-this.state.startTime)/1000}/>
       default : console.log("error")
     }
   };

@@ -6,7 +6,7 @@ const Results = (props)=>{
            <h1>Rezultatai</h1>
            <div className="line"></div>
            <h3>{props.userName} {props.userSurname}</h3>
-           <p>Laikas: </p>
+           <p>Laikas: {props.duration}</p>
            
            <div className="score-bar">
                 <div className="filled-score-bar" style={{width:props.results+"%"}}></div>

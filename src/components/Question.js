@@ -1,14 +1,6 @@
 import React from 'react';
 
 const Question = (props)=>{
-    console.log(props.questions);
-    const question = props.questions.filter((ques, i)=>{
-        return i===props.activeQuestion
-    }).map((question, i)=>{
-        return <div key={i}> 
-            <h2>{question.question}</h2>
-        </div>
-    });
 
     const answerContent = props.questions[props.activeQuestion].answers.map((answer, i)=>{
         return(
@@ -18,13 +10,12 @@ const Question = (props)=>{
                     onClick={()=>props.addAnswer({user_selected:i, correct:props.questions[props.activeQuestion].correct}, props.activeQuestion)}
                     className="answer-option"
                     name="question"
-                    id="red"
                     type="radio"
-                    
                 />
             </label>
     )});
 
+    //  styles 
     const emptyBarStyle = {
         backgroundColor:'rgb(46,84,151)',
         width:`${500/props.questions.length}px`,
@@ -44,7 +35,7 @@ const Question = (props)=>{
         <div className="question-page">
             <h3>Klausimas {props.activeQuestion+1}/5</h3>
             <h4>
-                {question}
+                {props.questions[props.activeQuestion].question}
             </h4>
             <form>
                 {answerContent}
@@ -57,8 +48,6 @@ const Question = (props)=>{
                     <button disabled={props.answered.length<props.activeQuestion+1? 'disabled' : null} onClick={()=>props.changeQuestion("forward")}>Sekantis</button>
                     <button disabled={props.answered.length<=0? 'disabled' : null} style={props.answered.length>0? endTestStyle : null} type="button" onClick={()=>{
                         props.endQuiz()
-                        props.changePart("results")
-                        props.setTime("ending")
                     }}>Baigti Testą</button>
                 </div>
 
