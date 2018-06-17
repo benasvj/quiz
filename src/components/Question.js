@@ -15,7 +15,7 @@ const Question = (props)=>{
             </label>
     )});
 
-    //  styles 
+    //  styles and progress bar render
     const emptyBarStyle = {
         backgroundColor:'rgb(46,84,151)',
         width:`${500/props.questions.length}px`,
